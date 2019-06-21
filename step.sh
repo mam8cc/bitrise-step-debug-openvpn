@@ -2,7 +2,7 @@
 set -eu
 
 sudo mkdir ~/logs/openvpn
-touch ~/logs/openvpn/output.log
+sudo touch ~/logs/openvpn/output.log
 
 case "$OSTYPE" in
   linux*)
