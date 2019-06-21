@@ -3,6 +3,7 @@ set -eu
 
 sudo mkdir ~/logs/openvpn
 sudo touch ~/logs/openvpn/output.log
+sudo chown -r $(whoami) ~/logs/openvpn
 
 case "$OSTYPE" in
   linux*)
