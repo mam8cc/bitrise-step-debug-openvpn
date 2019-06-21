@@ -46,7 +46,7 @@ EOF
     echo ${client_crt} | base64 -D -o client.crt > /dev/null 2>&1
     echo ${client_key} | base64 -D -o client.key > /dev/null 2>&1
 
-    sudo openvpn --client --dev tun --proto ${proto} --remote ${host} ${port} --resolv-retry infinite --nobind --persist-key --persist-tun --comp-lzo --verb 3 --ca ca.crt --cert client.crt --key client.key > ~/logs/openvpn/output.log &
+    sudo openvpn --client --dev tun --proto ${proto} --remote ${host} ${port} --resolv-retry infinite --nobind --persist-key --persist-tun --comp-lzo --verb 3 --ca ca.crt --cert client.crt --key client.key > ~/logs/openvpn/output.log 2>&1 &
     ifconfig -l
 
     sleep 5
