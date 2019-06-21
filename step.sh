@@ -1,7 +1,8 @@
 #!/bin/bash
 set -eu
 
-sudo mkdir ~/logs/openvpn.log
+sudo mkdir ~/logs/openvpn
+touch ~/logs/openvpn/output.log
 
 case "$OSTYPE" in
   linux*)
@@ -45,12 +46,12 @@ EOF
     echo ${client_crt} | base64 -D -o client.crt > /dev/null 2>&1
     echo ${client_key} | base64 -D -o client.key > /dev/null 2>&1
 
-    sudo openvpn --client --dev tun --proto ${proto} --remote ${host} ${port} --resolv-retry infinite --nobind --persist-key --persist-tun --comp-lzo --verb 3 --ca ca.crt --cert client.crt --key client.key > ~/logs/openvpn.log &
+    sudo openvpn --client --dev tun --proto ${proto} --remote ${host} ${port} --resolv-retry infinite --nobind --persist-key --persist-tun --comp-lzo --verb 3 --ca ca.crt --cert client.crt --key client.key > ~/logs/openvpn/output.log &
     ifconfig -l
 
     sleep 5
 
-    ping 10.0.5.200
+    ping -c 5 10.0.5.200
 
     if ifconfig -l | grep utun0 > /dev/null
     then
